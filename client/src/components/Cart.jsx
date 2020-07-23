@@ -1,5 +1,5 @@
 import React from "react";
-import MyNav from "./navbar";
+import MyNav from "./navbar/navbar";
 
 const Cart = function() {
   return (

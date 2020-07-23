@@ -1,0 +1,22 @@
+.searchbox{
+  display: none;
+  width: 206px;
+  /* border: 2px solid red; */
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  position:absolute;
+  left:1152px;
+  z-index: 100;
+}
+
+.element{
+  background-color: gray;
+  border: 0.5px solid black;
+
+}
+.element a{
+  font-size: 20px;
+  color: white;
+  
+}
