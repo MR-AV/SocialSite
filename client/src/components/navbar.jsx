@@ -1,5 +1,5 @@
 import React from "react";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {
   Navbar,
   Nav,
@@ -7,31 +7,8 @@ import {
   Form,
   FormControl,
   Button,
-  Badge
 } from "react-bootstrap";
 
-// function loadDoc(url, cFunction) {
-//   var xhttp;
-//   xhttp = new XMLHttpRequest();
-//   xhttp.onreadystatechange = function() {
-//     if (this.readyState === 4 && this.status === 200) {
-//       cFunction(this);
-//     } else {
-//       console.log("inside");
-//     }
-//   };
-//   console.log(url);
-//   xhttp.open("GET", url, true);
-//   xhttp.send();
-// }
-// function myFunction(xhttp) {
-//   // var myObj = JSON.parse(xhttp.responseText);
-//   // console.log(myObj);
-//   console.log("content = ");
-//   console.log(xhttp.responseText);
-//   // document.getElementById("demo").innerHTML =
-//   // xhttp.responseText;
-// }
 const MyNav = function(props) {
   return (
     <Navbar sticky="top" bg="light" expand="lg">
@@ -60,19 +37,9 @@ const MyNav = function(props) {
           </Button>
         </Form>
         <Button variant="primary" className="mx-1">
-          <AddShoppingCartIcon />
-          <Badge variant="secondary">{props.count}</Badge>
+          <AccountCircleIcon  />
         </Button>
-        {/* <button
-          onClick={() =>
-            loadDoc(
-              "http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json",
-              myFunction
-            )
-          }
-        >
-          ClickMe
-        </button> */}
+
       </Navbar.Collapse>
     </Navbar>
   );
