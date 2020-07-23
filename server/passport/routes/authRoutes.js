@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", passport.authenticate('google', {
     scope : ["profile"]
-}
+}  
 ));
 
 router.get("/feed", passport.authenticate('google'), (req, res) => {
