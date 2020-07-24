@@ -19,13 +19,14 @@ const items = [
 
 const App = function(props) {
   const [count, setCount] = useState(0);
+  const [user, setUser] = useState({username:null});
 
   function handleChange() {
     setCount(count + 1);
   }
   return (
     <div>
-      <MyNav count={count} />
+      <MyNav count={count} user={user} setUser={setUser}/>
       <div className="card-style d-flex justify-content-center">
         {items.map(function(item, index) {
           return (

@@ -9,6 +9,8 @@ import {
   Button,
 } from "react-bootstrap";
 import './styles.css'
+import {ENDPOINT} from '../utils'
+
 
 const MyNav = function(props) {
   let arr=["balpreet","akash","mudit","manu","bhuvan","jagdish","lonavla"];
@@ -34,7 +36,7 @@ const MyNav = function(props) {
 
   }
   return (
-    <div    >
+    <div>
     <Navbar sticky="top" bg="light" expand="lg" >
       <Navbar.Brand href="#">React-Bootstrap</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -54,22 +56,30 @@ const MyNav = function(props) {
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <Form inline >
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" value={filter} onFocus={mouseov}  onChange={fil} onBlur={mouseou} autoComplete="off" />
+          <Form inline >
+            <div>
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" value={filter} onFocus={mouseov} onChange={fil} onBlur={mouseou} autoComplete="off" />
+              <div className="searchbox" >
+                {filterArr.map((el,index)=><div className="element" key={index}><a href="#">{el}</a></div>)}  
+              </div>
+            </div>
           <Button variant="outline-success" className="mx-1">
-            Search
+              Search
           </Button>
-          
-        </Form>
-        <Button variant="primary" className="mx-1">
-          <AccountCircleIcon  />
-        </Button>
+          </Form>
+          {props.user.username ?
+            <Button variant="primary" className="mx-1">
+              <AccountCircleIcon  />
+            </Button> :
+            <Button variant="primary" className="mx-1">
+              <a href={`${ENDPOINT}/auth/google`} className="login-link">Login</a>
+            </Button>
+            
+          }
+        
       </Navbar.Collapse>
      
     </Navbar>
-    <div className="searchbox" >
-     {filterArr.map((el,index)=><div className="element" key={index}><a href="#">{el}</a></div>)}  
-     </div>
     </div> 
     
   );
