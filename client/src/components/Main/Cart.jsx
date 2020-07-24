@@ -1,10 +1,10 @@
 import React from "react";
-import MyNav from "./navbar/navbar";
+import MyNav from "../navbar/navbar";
 
-const Cart = function() {
+const Cart = function(props) {
   return (
     <div>
-      <MyNav />
+      <MyNav user={props.user} />
       <div>Inside Cart</div>
     </div>
   );

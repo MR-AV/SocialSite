@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import './styles.css'
 import {ENDPOINT} from '../utils'
-
+import { A } from 'hookrouter';
 
 const MyNav = function(props) {
   let arr=["balpreet","akash","mudit","manu","bhuvan","jagdish","lonavla"];
@@ -38,7 +38,7 @@ const MyNav = function(props) {
   return (
     <div>
     <Navbar sticky="top" bg="light" expand="lg" >
-      <Navbar.Brand href="#">React-Bootstrap</Navbar.Brand>
+      <A href="/"><Navbar.Brand >Shopily</Navbar.Brand></A>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -69,7 +69,7 @@ const MyNav = function(props) {
           </Form>
           {props.user.username ?
             <Button variant="primary" className="mx-1">
-              <AccountCircleIcon  />
+              <A href="/user-profile" className="login-link"><AccountCircleIcon  /></A>
             </Button> :
             <Button variant="primary" className="mx-1">
               <a href={`${ENDPOINT}/auth/google`} className="login-link">Login</a>
