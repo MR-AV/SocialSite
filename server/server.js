@@ -6,6 +6,7 @@ const router = require("./passport/routes/authRoutes");
 const session = require("express-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require('./passport/services/passport.js');
 
 
@@ -18,6 +19,15 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// set up cors to allow us to accept requests from our client
+app.use(
+    cors({
+      origin: "http://localhost:3000", // allow to server to accept request from different origin
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true // allow session cookie from browser to pass through
+    })
+  );
 
 
 mongoose.connect("mongodb://localhost:27017/SocialSiteDB", { useNewUrlParser: true, useUnifiedTopology: true });
