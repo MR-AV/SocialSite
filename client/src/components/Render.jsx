@@ -4,6 +4,9 @@ import Cart from "./Main/Cart";
 import User from './User/User';
 import { useRoutes } from 'hookrouter';
 import {HTML404 } from './ErrorPage/Error';
+import Login from "./Login/Login";
+
+
 const tmpUser = {
   username: 'Angela Yu',
   userProfile: 'https://cdn-images-1.medium.com/max/1200/1*8OkdLpw_7VokmSrzwXLnbg.jpeg',
@@ -12,7 +15,8 @@ const tmpUser = {
 
 function getRoutes(user) {
   return {
-    '/': () => <App user={user} />,
+    '/' : () => <Login />,
+    '/App': () => <App user={user} />,
     '/cart': () => <Cart user={user} />,
     '/user-profile': ()=><User user={user} />
   }

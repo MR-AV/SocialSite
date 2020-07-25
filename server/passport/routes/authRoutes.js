@@ -8,6 +8,7 @@ router.get("/", passport.authenticate('google', {
 ));
 
 router.get("/feed", passport.authenticate('google'), (req, res) => {
+    console.log("i'm feed");
     res.send("i'm feed");
 });
 
