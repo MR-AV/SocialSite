@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const Image = require("./Users/routes/uploadImage");
 require('./passport/services/passport.js');
 
 
@@ -38,6 +39,8 @@ app.get("/", (req, res) => {
     res.send("HOLA!!!! TERE MUH ME LOL...");
 });
 
+
+app.use('/upload/image', Image);
 app.use('/auth/google', router);
 
 app.listen(PORT, function() {

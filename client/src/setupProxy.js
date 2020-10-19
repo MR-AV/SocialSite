@@ -10,6 +10,10 @@ module.exports = function(app) {
     '/auth/google',
     createProxyMiddleware(obj)
   );
+  app.use(
+    '/upload/image',
+    createProxyMiddleware(obj)
+  );
 
 };
 

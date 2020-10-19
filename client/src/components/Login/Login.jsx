@@ -7,6 +7,7 @@ const Login = () => {
 
         <div>
         <h1>Welcome TO  Wasseypur</h1>
+        <a href = "https://www.google.com/">GOOGLE</a>
         <a href = "/auth/google">SIGN IN WITH GOOGLE</a>
         </div>
 
