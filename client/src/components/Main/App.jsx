@@ -51,14 +51,25 @@ const App = function(props) {
       <button onClick={handleClick}>Reload</button>
       <div className="card-style d-flex justify-content-center">
         {items.map(function(item, index) {
+          console.log(item.imageUrl)
+         return (
+          <>
+          {
+            item.imageUrl.map(function(image, imageIndex){
+            console.log(image);
           return (
             <Item
-              key={index}
-              src={item.url}
+              key={(imageIndex + (index+1)*10)}
+              src={image}
               addToCart={handleChange}
               changeRoot={props.changeRoot}
             />
           );
+          })
+         
+          }
+          </>
+        )
         })}
       </div>
     </div>

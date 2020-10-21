@@ -9,7 +9,8 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const image = require("./Users/routes/uploadImage");
-const Image = require("./Users/model").Image;
+// const Image = require("./Users/model").Image;
+const User = require("./Users/model").User;
 require('./passport/services/passport.js');
 
 
@@ -43,8 +44,9 @@ app.get("/", (req, res) => {
     res.send("HOLA!!!! TERE MUH ME LOL...");
 });
 
+
 app.get("/get-images", (req, res) => {
-    Image.find((err, images) => {
+    User.find({}, 'imageUrl', (err, images) => {
         if (err) {
             console.error("Some error occured ", err);
             res.status(504);
@@ -55,6 +57,18 @@ app.get("/get-images", (req, res) => {
         }
     });
 });
+// app.get("/get-images", (req, res) => {
+//     User.find((err, images) => {
+//         if (err) {
+//             console.error("Some error occured ", err);
+//             res.status(504);
+//             res.send("Some error occured");
+//         } else {
+//             console.log(images);
+//             res.send(images);
+//         }
+//     });
+// });
 
 
 
