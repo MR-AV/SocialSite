@@ -23,6 +23,7 @@ const upload = multer({ storage });
 
 router.post("/", upload.single('image'), (req, res) => {
     
+    if(req.isAuthenticated()){
     User.findById(req.user.id, function(err, user){
 
         if(err) res.send("Unable to upload Image");
@@ -40,6 +41,10 @@ router.post("/", upload.single('image'), (req, res) => {
             else res.send("User Not found");
         }
     });
+
+}
+    else
+        res.redirect(CLIENT_URL);
 
 });
 
