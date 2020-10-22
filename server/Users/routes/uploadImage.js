@@ -1,7 +1,7 @@
 const express = require("express");
 // const Image = require("../model").Image;
 const User = require("../model").User;
-
+const isLoggedin=require('../middleware/middleware').isLoggedIn;
 const router = express.Router();
 const CLIENT_URL = "http://localhost:3000";
 const CLIENT_HOME_PAGE_URL = `${CLIENT_URL}/app`;
@@ -21,8 +21,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-router.post("/", upload.single('image'), (req, res) => {
-    
+router.post("/",isLoggedin, upload.single('image'), (req, res) => {
+
     if(req.isAuthenticated()){
     User.findById(req.user.id, function(err, user){
 
