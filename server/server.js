@@ -48,8 +48,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/get-images", (req, res) => {
-
-    // if(req.isAuthenticated()){
+    if(req.isAuthenticated()){
     User.find({}, 'imageUrl', (err, images) => {
         if (err) {
             console.error("Some error occured ", err);
@@ -63,7 +62,7 @@ app.get("/get-images", (req, res) => {
             // res.send(images);
         }
     });
-    // }
+    }
     // else res.redirect(CLIENT_URL);
 });
 // app.get("/get-images", (req, res) => {

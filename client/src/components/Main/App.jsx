@@ -14,7 +14,7 @@ const App = function(props) {
   }
   
   function getAllImages() {
-    axios.get(`${ENDPOINT}/get-images`)
+    axios.get(`${ENDPOINT}/get-images`,{ withCredentials: true })
       .then(res => {
         console.log(res.data);
         setItems(res.data);
