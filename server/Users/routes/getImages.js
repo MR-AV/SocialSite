@@ -2,8 +2,8 @@ function splitArray(images){
 
     res = []
     images.forEach(element => {
-        element.imageUrl.forEach(image => {
-            res.push(image)
+        element.image.forEach(post => {
+            res.push(post.url)
         })
     });
     return res;

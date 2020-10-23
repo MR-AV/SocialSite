@@ -1,5 +1,5 @@
 const express = require("express");
-// const Image = require("../model").Image;
+const Image = require("../model").Image;
 const User = require("../model").User;
 const isLoggedin=require('../middleware/middleware').isLoggedIn;
 const router = express.Router();
@@ -23,7 +23,7 @@ const upload = multer({ storage });
 
 router.post("/",isLoggedin, upload.single('image'), (req, res) => {
 
-    if(req.isAuthenticated()){
+   //if(req.isAuthenticated()){
     User.findById(req.user.id, function(err, user){
 
         if(err) res.send("Unable to upload Image");
@@ -31,7 +31,8 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
             if(user){
 
                 const Url = `${SERVER_URL}/images/${req.filename}`;
-                user.imageUrl.push(Url);
+                const obj = new Image({url :Url})
+                user.image.push(obj);
                 user.save(err => {
                     if(err) res.send("Unable to upload Image")
                     return res.redirect(CLIENT_HOME_PAGE_URL);
@@ -42,9 +43,9 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
         }
     });
 
-}
-    else
-        res.redirect(CLIENT_URL);
+// }
+//     else
+//         res.redirect(CLIENT_URL);
 
 });
 

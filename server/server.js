@@ -28,6 +28,10 @@ app.use('/images', express.static('uploads'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.use((req, res, next) => {
+//     console.log("this runs always")
+//     next();
+// })
 // set up cors to allow us to accept requests from our client
 app.use(
     cors({
@@ -48,8 +52,9 @@ app.get("/", (req, res) => {
 
 
 app.get("/get-images", (req, res) => {
-    if(req.isAuthenticated()){
-    User.find({}, 'imageUrl', (err, images) => {
+
+     if(req.isAuthenticated()){
+    User.find({}, 'image', (err, images) => {
         if (err) {
             console.error("Some error occured ", err);
             res.status(504);
@@ -63,7 +68,7 @@ app.get("/get-images", (req, res) => {
         }
     });
     }
-    // else res.redirect(CLIENT_URL);
+    else res.redirect(CLIENT_URL);
 });
 // app.get("/get-images", (req, res) => {
 //     User.find((err, images) => {
@@ -77,7 +82,6 @@ app.get("/get-images", (req, res) => {
 //         }
 //     });
 // });
-
 
 
 app.use('/upload/image', image);

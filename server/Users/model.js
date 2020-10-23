@@ -9,7 +9,7 @@ const Image = new mongoose.model("Image", imageSchema);
 const userSchema = new mongoose.Schema({
     userName: String,
     googleId: String,
-    imageUrl: [String]
+    image: [imageSchema]
 });
 
 userSchema.plugin(findOrCreate);
