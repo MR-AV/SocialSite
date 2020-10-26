@@ -6,6 +6,7 @@ import { useRoutes } from 'hookrouter';
 import {HTML404 } from './ErrorPage/Error';
 import Login from "./Login/Login";
 
+import SetUsername from './SetUsername/SetUsername';
 
 const tmpUser = {
   username: 'Angela Yu',
@@ -18,7 +19,8 @@ function getRoutes(user) {
     '/' : () => <Login />,
     '/app': () => <App user={user} />,
     '/cart': () => <Cart user={user} />,
-    '/user-profile': ()=><User user={user} />
+    '/user-profile': ()=><User user={user} />,
+    '/set-username':()=><SetUsername />
   }
 }
 
