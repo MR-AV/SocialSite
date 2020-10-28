@@ -46,4 +46,21 @@ router.post("/set-username",function(req,res){
     });
 })
 
+
+
+router.get('/allow-access',function(req,res){
+    console.log('hi im here');  
+    if(req.isAuthenticated()){
+        console.log('hi im here too');  
+        if(req.user.userName!==undefined){
+            console.log('gg');
+            res.send(false);
+        }
+    }
+    else{
+        console.log('now im here');
+        res.redirect(CLIENT_LOGIN_PAGE_URL);
+    }
+})
+
 module.exports = router;

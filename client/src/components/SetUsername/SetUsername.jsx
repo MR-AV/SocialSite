@@ -1,8 +1,27 @@
-import React from "react";
+import React , {useEffect}  from "react";
+import axios from "axios"
+import { ENDPOINT } from "../utils";
+import { navigate } from 'hookrouter';
 
 const SetUsername = () => {
 
 
+    useEffect(()=>{
+          
+
+            async function fun(){
+                console.log('yoyo');
+                await axios.get(`${ENDPOINT}/auth/google/allow-access`,{ withCredentials: true })
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.data === false) {
+                        navigate('/app')
+                    }
+                })
+                console.log('yoyoyoy');
+                } 
+                fun();
+    })
     return(
 
         <div>
