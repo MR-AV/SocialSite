@@ -9,6 +9,11 @@ const Item = function(props) {
   const likeRef = useRef(null)
   function handleChange(){
     //axios call
+
+    axios.post("/postLikes", {
+      userId : props.userId,
+      imageId : props.imageId
+    },{withCrdentials: true})
      let x = Number(likeRef.current.innerText)
      x += change
      change = (-1)*change

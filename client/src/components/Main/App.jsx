@@ -35,6 +35,8 @@ const App = function(props) {
               src={item.url}
               caption = {item.caption}
               likes = {item.likes}
+              imageId = {item.imageId}
+              userId = {item.userId}
               addToCart={handleChange}
               changeRoot={props.changeRoot}
             />
