@@ -57,6 +57,7 @@ const App = function(props) {
               key={index}
               src={item.url}
               caption = {item.caption}
+              likes = {item.likes}
               addToCart={handleChange}
               changeRoot={props.changeRoot}
             />
