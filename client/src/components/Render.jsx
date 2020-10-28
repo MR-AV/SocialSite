@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import App from "./Main/App";
 import Cart from "./Main/Cart";
 import User from './User/User';
@@ -28,6 +28,10 @@ function Render() {
   const [state, setState] = useState(0);
   const [user, setUser] = useState(tmpUser);
   
+  useEffect(()=>{
+    
+  },[]);
+
   function handleRoot() {
       setState(1);
     }
