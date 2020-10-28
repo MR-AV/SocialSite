@@ -26,16 +26,17 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
    //if(req.isAuthenticated()){
     User.findById(req.user.id, function(err, user){
 
-        if(err) res.send("Unable to upload Image");
+        if(err) return res.send("Unable to upload Image outside");
         else{
             if(user){
 
                 const Url = `${SERVER_URL}/images/${req.filename}`;
-                const obj = new Image({url :Url, caption : req.body.caption, Likes : 0})
+                const obj = new Image({url :Url, caption : req.body.caption, Likes : []})
                // console.log(req.body.caption)
                 user.image.push(obj);
                 user.save(err => {
-                    if(err) res.send("Unable to upload Image")
+                    console.log(err);
+                    if(err) return res.send("Unable to upload Image")
                     return res.redirect(CLIENT_HOME_PAGE_URL);
                 })
 
