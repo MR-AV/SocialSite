@@ -31,7 +31,7 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
             if(user){
 
                 const Url = `${SERVER_URL}/images/${req.filename}`;
-                const obj = new Image({url :Url, caption : req.body.caption, Likes : []})
+                const obj = new Image({url :Url, caption : req.body.caption, likes : []})
                // console.log(req.body.caption)
                 user.image.push(obj);
                 user.save(err => {

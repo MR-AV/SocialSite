@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Likes from '@material-ui/icons/ThumbUpAlt';
 import Comments from '@material-ui/icons/ChatBubble';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
+import axios from "axios"
 // import Cart from "./Cart";
 let change = 1
 const Item = function(props) {
@@ -14,12 +15,10 @@ const Item = function(props) {
       userId : props.userId,
       imageId : props.imageId
     },{withCrdentials: true})
-     let x = Number(likeRef.current.innerText)
-     x += change
-     change = (-1)*change
-    //  x++;
-    //  console.log(x)
-    likeRef.current.innerText = x
+    .then((res) => {
+      console.log("res = ", res)
+      likeRef.current.innerText = res.data})
+    
     //console.log(likeRef.current.innerText)
   }
 

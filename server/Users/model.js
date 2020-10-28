@@ -10,7 +10,7 @@ const Comment = new mongoose.model("Comment", commentSchema);
 const imageSchema = new mongoose.Schema({
     url: String,
     caption : String,
-    Likes : [String],
+    likes : [String],
     comments : [commentSchema]
 });
 const Image = new mongoose.model("Image", imageSchema);
