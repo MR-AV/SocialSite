@@ -9,6 +9,7 @@ const Image = function(){
 
   return (
     <form method="POST" action="/upload/image" enctype="multipart/form-data" >
+      <textarea name = "caption" placeholder = "Enter Caption" ></textarea>
       {image && <img src={image} alt="" width="300px" height="300px" />}
       <input type="file" name="image" onChange={handleChange} />
       <button type="submit">Upload</button>

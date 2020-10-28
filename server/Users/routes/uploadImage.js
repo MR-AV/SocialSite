@@ -31,7 +31,8 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
             if(user){
 
                 const Url = `${SERVER_URL}/images/${req.filename}`;
-                const obj = new Image({url :Url})
+                const obj = new Image({url :Url, caption : req.body.caption})
+               // console.log(req.body.caption)
                 user.image.push(obj);
                 user.save(err => {
                     if(err) res.send("Unable to upload Image")

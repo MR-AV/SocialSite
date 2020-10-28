@@ -21,6 +21,7 @@ const Item = function(props) {
         width: "18rem"
       }}
     >
+      <Card.Header>{props.caption}</Card.Header>
       <Card.Img
         //style={{ width: "100%", height: "auto" }}
         variant="top"

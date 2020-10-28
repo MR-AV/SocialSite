@@ -1,8 +1,17 @@
 const findOrCreate = require("mongoose-findorcreate");
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema({
+    comment : String,
+    userId : String,
+    imageId : String
+})
+const Comment = new mongoose.model("Comment", commentSchema);
 const imageSchema = new mongoose.Schema({
-    url: String
+    url: String,
+    caption : String,
+    Likes : Number,
+    comments : [commentSchema]
 });
 const Image = new mongoose.model("Image", imageSchema);
 
@@ -19,5 +28,7 @@ module.exports = {
     userSchema,
     User,
     imageSchema,
-    Image
+    Image,
+    commentSchema,
+    Comment
 }
