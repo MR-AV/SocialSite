@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Likes from '@material-ui/icons/ThumbUpAlt';
 import Comments from '@material-ui/icons/ChatBubble';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
+import axios from "axios"
 // import Cart from "./Cart";
 let change = 1
 const Item = function(props) {
@@ -9,6 +10,9 @@ const Item = function(props) {
   const likeRef = useRef(null)
   function handleChange(){
     //axios call
+    // axios.post
+
+    // setting the likes
      let x = Number(likeRef.current.innerText)
      x += change
      change = (-1)*change
