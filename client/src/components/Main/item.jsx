@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import StoreIcon from "@material-ui/icons/Store";
+import React, { useState, useRef } from "react";
+import Likes from '@material-ui/icons/ThumbUpAlt';
+import Comments from '@material-ui/icons/ChatBubble';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
 // import Cart from "./Cart";
-
+let change = 1
 const Item = function(props) {
-  const [state, setState] = useState(false);
-
-  function handleChange() {
-    setState(!state);
+  
+  const likeRef = useRef(null)
+  function handleChange(){
+    //axios call
+     let x = Number(likeRef.current.innerText)
+     x += change
+     change = (-1)*change
+    //  x++;
+    //  console.log(x)
+    likeRef.current.innerText = x
+    //console.log(likeRef.current.innerText)
   }
 
-  return (
+  return ( 
     <Card
       border="warning"
-      // onMouseOver={handleChange}
-      // onMouseOut={handleChange}
       style={{
         margin: "20px",
         width: "18rem"
@@ -23,45 +28,23 @@ const Item = function(props) {
     >
       <Card.Header>{props.caption}</Card.Header>
       <Card.Img
-        //style={{ width: "100%", height: "auto" }}
         variant="top"
         src={props.src}
         alt="comp"
       />
-      <Card.Body>
-        <h2>
-          <span>Details of the laptop</span>
-        </h2>
+      <Card.Body>Likes <span ref = {likeRef}>{props.likes}</span></Card.Body>
+      <Card.Footer>
         <ButtonGroup aria-label="Basic example">
-          <Button
-            variant="primary"
-            onClick={
-              state === false
-                ? () => {
-                    props.addToCart();
-                    handleChange();
-                  }
-                : () => {
-                    // location.href = "Cart.js";
-                    props.changeRoot();
-                  }
-            }
-          >
-            <AddShoppingCartIcon /> Add To Cart
+          <Button variant="primary" onClick = {handleChange} >
+
+            <Likes/> Like
           </Button>
           <Button variant="secondary">
-            <StoreIcon /> Buy Now
+            <Comments /> Comments
           </Button>
         </ButtonGroup>
+      </Card.Footer>
 
-        {/* <MyButton variant="primary">
-          Add To Cart <AddShoppingCartIcon />
-        </MyButton>
-
-        <MyButton variant="secondary">
-          Buy Now <StoreIcon />
-        </MyButton> */}
-      </Card.Body>
     </Card>
   );
 };
