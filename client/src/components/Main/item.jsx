@@ -1,13 +1,19 @@
 import React, { useState, useRef } from "react";
 import Likes from '@material-ui/icons/ThumbUpAlt';
 import Comments from '@material-ui/icons/ChatBubble';
+import AddCommentIcon from '@material-ui/icons/AddComment';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
 import axios from "axios"
 import { ENDPOINT } from "../utils";
 // import Cart from "./Cart";
 let change = 1
 const Item = function(props) {
+  const commentboxref=useRef(null)
+  function addcommentbox(){
+    commentboxref.current.classList.toggle("a");
   
+  }
+
   const likeRef = useRef(null)
   function handleChange(){
     axios(
@@ -35,14 +41,13 @@ const Item = function(props) {
   }
 
   return ( 
-
-    <Card
-      border="warning"
-      style={{
-        margin: "20px",
-        width: "18rem"
-      }}
-    >
+    <div >
+    <Card style={{
+      width: "500px",
+      border:"2px solid red",
+      height:"500px",
+      margin:"auto"
+    }}>
       <Card.Header>{props.caption}</Card.Header>
       {/* <span >userid = {props.userId}</span> */}
       <Card.Img
@@ -60,10 +65,15 @@ const Item = function(props) {
           <Button variant="secondary">
             <Comments /> Comments
           </Button>
+          <Button variant="secondary" onClick={addcommentbox}>
+            <AddCommentIcon  /> Add Comment
+          </Button>
         </ButtonGroup>
-      </Card.Footer>
-
+        <textarea placeholder="Write your comment" className="b"  ref={commentboxref} width="400px"></textarea>
+      </Card.Footer>          
+      
     </Card>
+    </div>
   );
 };
 
