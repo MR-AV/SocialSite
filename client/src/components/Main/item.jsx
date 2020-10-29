@@ -45,8 +45,9 @@ const Item = function(props) {
     <Card style={{
       width: "500px",
       border:"2px solid red",
-      height:"500px",
-      margin:"auto"
+      height:"auto",
+      margin:"auto",
+      marginBottom : "20px"
     }}>
       <Card.Header>{props.caption}</Card.Header>
       {/* <span >userid = {props.userId}</span> */}
@@ -55,15 +56,15 @@ const Item = function(props) {
         src={props.src}
         alt="comp"
       />
-      <Card.Body>Likes <span ref = {likeRef}>{props.likes}</span></Card.Body>
+      {/* <Card.Body>Likes <span ref = {likeRef}>{props.likes}</span></Card.Body> */}
       <Card.Footer>
         <ButtonGroup aria-label="Basic example">
           <Button variant="primary" onClick = {handleChange} >
 
-            <Likes/> Like
+            <Likes/> Likes <span ref = {likeRef}>{props.likes}</span>
           </Button>
           <Button variant="secondary">
-            <Comments /> Comments
+            <Comments /> Comments {props.comments}
           </Button>
           <Button variant="secondary" onClick={addcommentbox}>
             <AddCommentIcon  /> Add Comment
