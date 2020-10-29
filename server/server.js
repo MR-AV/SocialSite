@@ -18,6 +18,7 @@ require('./passport/services/passport.js');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(session({
     secret: "MY POST",
     resave: false,
@@ -55,7 +56,7 @@ mongoose.set("useCreateIndex", true);
 
 
 app.get("/", (req, res) => {
-    res.send("HOLA!!!! TERE MUH ME LOL...");
+    res.send("server is up and running on port 5000");
 });
 
 
@@ -63,38 +64,53 @@ app.use("/get-images", getImages);
 app.use('/upload/image', image);
 app.use('/auth/google', router);
 function getLikes(user,arr, imageId, userId){
-    let  i = 0, j = 0;
-    for(i; i < arr.len; i++)
-    if(arr[i]._id == imageId)
-    break;
 
-    for( j = 0; j < arr[i].likes.len; i++)
+    // console.log("in")
+    // console.log(arr);
+    // console.log("len = ", arr.length);
+    let  i = 0, j = 0;
+
+    for(i; i < arr.length; i++){
+        console.log(arr[i]._id)
+    if(arr[i]._id == imageId){
+        console.log("found image");    
+        break;
+        }
+
+    }
+
+    for( j = 0; j < arr[i].likes.length; i++)
         if(arr[i].likes[j] == userId)
         {
+            console.log("foundUser");
             break;
         }
 
-    if(j == arr[i].likes.len) arr[i].likes.push(userId);
+    if(j == arr[i].likes.length) arr[i].likes.push(userId);
     else arr[i].likes.splice(j, 1)
    
     user.save(err => {
         //console.log(err);
         if(err) return res.send("Unable to upload Image")
     })
-     return arr[i].likes.len;   
+     return arr[i].likes.length;   
 
 }
 app.post("/postLikes", (req, res) => {
 
     const userId = req.body.userId
+   // console.log(req);
+    //console.log("userId = ", userId)
     const imageId = req.body.imageId
-    User.find({id : userId}, (err, user) => {
+   // console.log("imageId = ", imageId)
+    User.findById(userId, (err, user) => {
 
         if(err) return res.redirect(CLIENT_URL);
-        
-        let len = getLikes(user[0],user[0].image, imageId, req.user.id)
-        
-        return res.send(len)
+        console.log("usr = ",user)
+        let len = getLikes(user, user.image, imageId, req.user.id)
+        console.log("len = ", len);
+        let obj = {len : len}
+        return res.send(obj)
 
     })
 })

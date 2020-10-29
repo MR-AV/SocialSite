@@ -3,26 +3,39 @@ import Likes from '@material-ui/icons/ThumbUpAlt';
 import Comments from '@material-ui/icons/ChatBubble';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
 import axios from "axios"
+import { ENDPOINT } from "../utils";
 // import Cart from "./Cart";
 let change = 1
 const Item = function(props) {
   
   const likeRef = useRef(null)
   function handleChange(){
-    //axios call
+    axios(
+    {
 
-    axios.post("/postLikes", {
-      userId : props.userId,
-      imageId : props.imageId
-    },{withCrdentials: true})
+      method : 'post',
+      url : "/postLikes",
+      data : JSON.stringify({
+        userId : props.userId,
+        imageId : props.imageId
+      }),
+      headers: {'Content-Type': 'application/json' },
+      // data: bodyFormData,
+      // headers: {'Content-Type': 'multipart/form-data' },
+      withCrdentials: true
+    })
     .then((res) => {
       console.log("res = ", res)
-      likeRef.current.innerText = res.data})
+      likeRef.current.innerText = res.data.len})
+      .catch(err => {
+        console.log("err = ",err)
+      })
     
     //console.log(likeRef.current.innerText)
   }
 
   return ( 
+
     <Card
       border="warning"
       style={{
@@ -31,6 +44,7 @@ const Item = function(props) {
       }}
     >
       <Card.Header>{props.caption}</Card.Header>
+      {/* <span >userid = {props.userId}</span> */}
       <Card.Img
         variant="top"
         src={props.src}
