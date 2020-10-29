@@ -22,7 +22,7 @@ const App = function(props) {
   const uploadRef = useRef(null)
   function showuploadbox(){
     // uploadRef.current.classList.toggle('a');
-    uploadRef.current.classList.toggle("a");
+    uploadRef.current.classList.toggle("uploadbox");
   }
 
 
@@ -30,7 +30,7 @@ const App = function(props) {
     <div  >
       <MyNav  user={props.user} showuploadbox={showuploadbox} />
       {/* <button onClick={showuploadbox} >click</button> */}
-      <div ref={uploadRef} className="b" >
+      <div ref={uploadRef} className="nodisplay" >
       <Image />
       </div>
       <div>

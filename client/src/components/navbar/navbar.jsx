@@ -69,14 +69,18 @@ const MyNav = function(props) {
           </Button>
           </Form>
           {props.user.username ?
-            <Button variant="primary" className="mx-1">
+            <div style={{display:"flex",  alignItems:"center"}}>
+            <Button variant="primary" className="mx-1" >
               <A href="/user-profile" className="login-link"><AccountCircleIcon  /></A>
-            </Button> :
+            </Button>
+            <h4 style={{display:"inline-block"}}>{props.user.username}</h4>
+            </div> :
             <Button variant="primary" className="mx-1">
               <a href={`${ENDPOINT}/auth/google`} className="login-link">Login</a>
             </Button>
             
           }
+
         
       </Navbar.Collapse>
      

@@ -5,13 +5,22 @@ import AddCommentIcon from '@material-ui/icons/AddComment';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
 import axios from "axios"
 import { ENDPOINT } from "../utils";
+import './styles.css'
 // import Cart from "./Cart";
+import Comment from './Comment';
 let change = 1
 const Item = function(props) {
-  const commentboxref=useRef(null)
+  const addcommentboxref=useRef(null)
   function addcommentbox(){
-    commentboxref.current.classList.toggle("a");
+    addcommentboxref.current.classList.toggle("addcommentdiv");
   
+  }
+
+  const viewcommentsRef=useRef(null)
+  function viewcomments(){
+    // console.log('hi');
+    // console.log(viewcommentsref.current);
+  viewcommentsRef.current.classList.toggle("commentdiv");
   }
 
   const likeRef = useRef(null)
@@ -63,14 +72,20 @@ const Item = function(props) {
 
             <Likes/> Likes <span ref = {likeRef}>{props.likes}</span>
           </Button>
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={viewcomments}>
             <Comments /> Comments {props.comments}
           </Button>
           <Button variant="secondary" onClick={addcommentbox}>
             <AddCommentIcon  /> Add Comment
           </Button>
         </ButtonGroup>
-        <textarea placeholder="Write your comment" className="b"  ref={commentboxref} width="400px"></textarea>
+        <div className="nodisplay"  ref={addcommentboxref} >
+        <textarea placeholder="Write your comment"  width="400px"></textarea>
+        <button style={{height:"40px"}}>Post</button>
+        </div>
+        <div className="nodisplay" ref={viewcommentsRef} >
+        <Comment viewcommentsRef={viewcommentsRef}/>
+        </div>
       </Card.Footer>          
       
     </Card>
