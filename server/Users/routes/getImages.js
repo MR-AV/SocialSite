@@ -1,12 +1,25 @@
-function splitArray(images){
+const express = require("express");
+const router = express.Router();
+const CLIENT_URL = "http://localhost:3000";
+const User = require("../model").User;
+const splitArray = require("./splitArray")
+router.get("/", (req, res) => {
 
-    res = []
-    images.forEach(element => {
-        element.image.forEach(post => {
-            res.push({url : post.url, caption : post.caption, likes : post.Likes})
-        })
-    });
-    return res;
-}
+    if(req.isAuthenticated()){
+   User.find({}, 'image', (err, images) => {
+       if (err) {
+           console.error("Some error occured ", err);
+           res.status(504);
+           res.send("Some error occured");
+       } else {
+           console.log(images);
+           ans = splitArray(images);
+           console.log(ans);
+           res.send(ans);
+       }
+   });
+   }
+   else res.redirect(CLIENT_URL);
+});
 
-module.exports = splitArray;
+module.exports = router
