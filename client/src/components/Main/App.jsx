@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState,useRef } from "react"
 import Item from "./item"
 import MyNav from "../navbar/navbar"
 import Image from "./Image"
 import axios from "axios"
 import { ENDPOINT } from "../utils";
+import './styles.css'
 
 /*
 const items = [
@@ -43,14 +44,22 @@ const App = function(props) {
     console.log('Hey, you clicked!');
     getAllImages();
   }
+  const uploadRef = useRef(null)
+  function showuploadbox(){
+    // uploadRef.current.classList.toggle('a');
+    uploadRef.current.classList.toggle("a");
+  }
 
 
   return (  
-    <div>
-      <MyNav count={count} user={props.user} />
+    <div  >
+      <MyNav count={count} user={props.user} showuploadbox={showuploadbox} />
+      {/* <button onClick={showuploadbox} >click</button> */}
+      <div ref={uploadRef} className="b" >
       <Image />
+      </div>
       <button onClick={handleClick}>Reload</button>
-      <div className="card-style d-flex justify-content-center">
+      <div style={{border: "20px solid red"}}>
         {items.map(function(item, index) {
           return (
             <Item
