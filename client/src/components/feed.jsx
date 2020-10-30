@@ -8,7 +8,7 @@ import {HTML404 } from './ErrorPage/Error';
 import SetUsername from './SetUsername/SetUsername';
 
 const tmpUser = {
-  userName: 'Angela Yu',
+  userName: 'AV',
   userProfile: 'https://cdn-images-1.medium.com/max/1200/1*8OkdLpw_7VokmSrzwXLnbg.jpeg',
   userBackground: 'https://i.ytimg.com/vi/f600WUNFMYI/maxresdefault.jpg'
 }

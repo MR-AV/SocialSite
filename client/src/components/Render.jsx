@@ -10,11 +10,6 @@ import Feed from "./feed";
 
 import SetUsername from './SetUsername/SetUsername';
 
-const tmpUser = {
-  username: 'Angela Yu',
-  userProfile: 'https://cdn-images-1.medium.com/max/1200/1*8OkdLpw_7VokmSrzwXLnbg.jpeg',
-  userBackground: 'https://i.ytimg.com/vi/f600WUNFMYI/maxresdefault.jpg'
-}
 
 function getRoutes() {
   return {
