@@ -10,15 +10,14 @@ const SetUsername = () => {
           
 
             async function fun(){
-                console.log('yoyo');
+               
                 await axios.get(`${ENDPOINT}/auth/google/allow-access`,{ withCredentials: true })
                 .then(function (response) {
                     console.log(response.data);
                     if (response.data === false) {
-                        navigate('/app')
+                        navigate('/feed/app')
                     }
                 })
-                console.log('yoyoyoy');
                 } 
                 fun();
     })

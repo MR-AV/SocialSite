@@ -5,6 +5,8 @@ import User from './User/User';
 import { useRoutes } from 'hookrouter';
 import {HTML404 } from './ErrorPage/Error';
 import Login from "./Login/Login";
+import axios from "axios";
+import Feed from "./feed";
 
 import SetUsername from './SetUsername/SetUsername';
 
@@ -14,30 +16,20 @@ const tmpUser = {
   userBackground: 'https://i.ytimg.com/vi/f600WUNFMYI/maxresdefault.jpg'
 }
 
-function getRoutes(user) {
+function getRoutes() {
   return {
     '/' : () => <Login />,
-    '/app': () => <App user={user} />,
-    '/cart': () => <Cart user={user} />,
-    '/user-profile': ()=><User user={user} />,
-    '/set-username':()=><SetUsername />
+    '/feed*': () =>  <Feed/>,
+    // '/cart': () => <Cart user={user} />,
+    // '/user-profile': ()=><User user={user} />,
+    // '/set-username':()=><SetUsername />
   }
 }
 
 function Render() {
-  const [state, setState] = useState(0);
-  const [user, setUser] = useState(tmpUser);
   
-  useEffect(()=>{
-    
-  },[]);
-
-  function handleRoot() {
-      setState(1);
-    }
-      
-    
-  const page = useRoutes(getRoutes(user));
+  
+  const page = useRoutes(getRoutes());
   return (
     page || <HTML404 />
   );

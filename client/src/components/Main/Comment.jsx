@@ -8,8 +8,8 @@ const Comment = function(props){
 
 return(
     <div >
-        <p><strong>Username1</strong></p>
-        <p>Comment1</p>
+        <p><strong>{props.comment.clientName || "Anonymous"} </strong></p>
+        <p>{props.comment.comment}</p>
     </div>
 );
 

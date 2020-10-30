@@ -10,20 +10,37 @@ import './styles.css'
 import Comment from './Comment';
 let change = 1
 const Item = function(props) {
-  const addcommentboxref=useRef(null)
+  const addcommentboxref= useRef(null)
+  const viewcommentsRef = useRef(null)
+  const commentRef      = useRef(null)
+  const commentCountRef = useRef(null)
+  const likeRef = useRef(null)
+  const [comments, setComments] = useState([]);
+
   function addcommentbox(){
     addcommentboxref.current.classList.toggle("addcommentdiv");
-  
   }
-
-  const viewcommentsRef=useRef(null)
   function viewcomments(){
-    // console.log('hi');
-    // console.log(viewcommentsref.current);
+
   viewcommentsRef.current.classList.toggle("commentdiv");
+  axios(
+    {
+
+      method : 'post',
+      url : "/Comment/getComments",
+      data : JSON.stringify({
+        userId : props.userId,
+        imageId : props.imageId,
+      }),
+      headers: {'Content-Type': 'application/json' },
+      withCrdentials: true
+    })
+  .then( (res) => {
+    console.log(res.data);
+    setComments(res.data.comments);
+  }).catch((err) => console.log("errInGettingComments = ",err));
   }
 
-  const likeRef = useRef(null)
   function handleChange(){
     axios(
     {
@@ -35,8 +52,6 @@ const Item = function(props) {
         imageId : props.imageId
       }),
       headers: {'Content-Type': 'application/json' },
-      // data: bodyFormData,
-      // headers: {'Content-Type': 'multipart/form-data' },
       withCrdentials: true
     })
     .then((res) => {
@@ -45,10 +60,36 @@ const Item = function(props) {
       .catch(err => {
         console.log("err = ",err)
       })
-    
-    //console.log(likeRef.current.innerText)
   }
+  function handleComments(){
+    axios(
+      {
+  
+        method : 'post',
+        url : "/Comment/postComment",
+        data : JSON.stringify({
+          userId : props.userId,
+          imageId : props.imageId,
+          comment : commentRef.current.value,
+          clientName : props.userName
+        }),
+        headers: {'Content-Type': 'application/json' },
+        withCrdentials: true
+      })
+      .then((res) => {
+        console.log("res = ", res)
+        commentRef.current.value = "";
+        addcommentbox()
+        commentCountRef.current.innerText = res.data.len
+      })
+        .catch(err => {
+          console.log("err = ",err)
+        })
+  }
+  function getComments(){
 
+
+  }
   return ( 
     <div >
     <Card style={{
@@ -73,18 +114,24 @@ const Item = function(props) {
             <Likes/> Likes <span ref = {likeRef}>{props.likes}</span>
           </Button>
           <Button variant="secondary" onClick={viewcomments}>
-            <Comments /> Comments {props.comments}
+            <Comments /> Comments <span ref = {commentCountRef}>{props.comments}</span>
           </Button>
           <Button variant="secondary" onClick={addcommentbox}>
             <AddCommentIcon  /> Add Comment
           </Button>
         </ButtonGroup>
         <div className="nodisplay"  ref={addcommentboxref} >
-        <textarea placeholder="Write your comment"  width="400px"></textarea>
-        <button style={{height:"40px"}}>Post</button>
+        <textarea placeholder="Write your comment"  width="400px" ref = {commentRef}></textarea>
+        <button style={{height:"40px"}} onClick = {handleComments}>Post</button>
         </div>
         <div className="nodisplay" ref={viewcommentsRef} >
-        <Comment viewcommentsRef={viewcommentsRef}/>
+        {
+          comments.map((comment, index) => {
+          return (
+            <Comment viewcommentsRef={viewcommentsRef} key = {index} comment = {comment} />
+          )
+          })
+        }
         </div>
       </Card.Footer>          
       

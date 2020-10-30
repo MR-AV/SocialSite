@@ -44,6 +44,7 @@ const App = function(props) {
               imageId = {item.imageId}
               userId = {item.userId}
               comments = {item.comments}
+              userName = {props.user.userName}
               
             />
           );
