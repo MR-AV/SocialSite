@@ -77,7 +77,7 @@ function getLikes(user,arr, imageId, userId){
 
     }
 
-    for( j = 0; j < arr[i].likes.length; i++)
+    for( j = 0; j < arr[i].likes.length; j++)
         if(arr[i].likes[j] == userId)
         {
             console.log("foundUser");
