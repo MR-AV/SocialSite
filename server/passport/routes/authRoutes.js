@@ -1,10 +1,10 @@
 const passport = require("passport");
 const express = require("express");
 const router = express.Router();
-const CLIENT_HOME_PAGE_URL = "http://localhost:3000/app"
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000/feed/app"
 const CLIENT_LOGIN_PAGE_URL = "http://localhost:3000"
 
-const CLIENT_USERNAME_SET_PAGE="http://localhost:3000/set-username"
+const CLIENT_USERNAME_SET_PAGE="http://localhost:3000/feed/set-username"
 const User = require("../../Users/model").User;
 const bodyParser = require("body-parser");
 const app = express();

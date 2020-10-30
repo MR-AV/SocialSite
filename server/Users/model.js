@@ -3,8 +3,10 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
     comment : String,
-    userId : String,
-    imageId : String
+    clientId : String,
+    clientName : String
+    // userId : String,
+    // imageId : String
 })
 const Comment = new mongoose.model("Comment", commentSchema);
 const imageSchema = new mongoose.Schema({

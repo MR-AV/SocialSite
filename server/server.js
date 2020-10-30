@@ -13,6 +13,8 @@ const key = require("./config/key");
 const User = require("./Users/model").User;
 const splitArray = require("./Users/routes/splitArray");
 const getImages = require("./Users/routes/getImages")
+const Comments = require("./Users/routes/Comments")
+const getUserName = require("./Users/routes/userName")
 const CLIENT_URL = "http://localhost:3000";
 require('./passport/services/passport.js');
 
@@ -64,10 +66,6 @@ app.use("/get-images", getImages);
 app.use('/upload/image', image);
 app.use('/auth/google', router);
 function getLikes(user,arr, imageId, userId){
-
-    // console.log("in")
-    // console.log(arr);
-    // console.log("len = ", arr.length);
     let  i = 0, j = 0;
 
     for(i; i < arr.length; i++){
@@ -90,7 +88,6 @@ function getLikes(user,arr, imageId, userId){
     else arr[i].likes.splice(j, 1)
    
     user.save(err => {
-        //console.log(err);
         if(err) return res.send("Unable to upload Image")
     })
      return arr[i].likes.length;   
@@ -99,10 +96,7 @@ function getLikes(user,arr, imageId, userId){
 app.post("/postLikes", (req, res) => {
 
     const userId = req.body.userId
-   // console.log(req);
-    //console.log("userId = ", userId)
     const imageId = req.body.imageId
-   // console.log("imageId = ", imageId)
     User.findById(userId, (err, user) => {
 
         if(err) return res.redirect(CLIENT_URL);
@@ -114,6 +108,9 @@ app.post("/postLikes", (req, res) => {
 
     })
 })
+
+app.use("/getUserName", getUserName);
+app.use("/Comment", Comments);
 
 app.listen(PORT, function() {
     console.log(`server is up and running on port ${PORT}`);

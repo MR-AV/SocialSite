@@ -4,7 +4,7 @@ const User = require("../model").User;
 const isLoggedin=require('../middleware/middleware').isLoggedIn;
 const router = express.Router();
 const CLIENT_URL = "http://localhost:3000";
-const CLIENT_HOME_PAGE_URL = `${CLIENT_URL}/app`;
+const CLIENT_HOME_PAGE_URL = `${CLIENT_URL}/feed/app`;
 const SERVER_URL = "http://localhost:5000";
 
 const multer = require("multer");
@@ -45,24 +45,10 @@ router.post("/",isLoggedin, upload.single('image'), (req, res) => {
         }
     });
 
-// }
-//     else
-//         res.redirect(CLIENT_URL);
+
 
 });
 
-/*router.post("/", upload.single('image'), (req, res) => {
-    // console.log(req.user, req.filename);
-    const image = new Image({ url: `${SERVER_URL}/images/${req.filename}` });
-    image.save(err => {
-        if (err)
-            res.send("Some error");
-        else
-            res.redirect(CLIENT_HOME_PAGE_URL);
-    });
-    // console.log(Image);
-    // res.redirect(CLIENT_HOME_PAGE_URL);
 
-});*/
 
 module.exports = router;
