@@ -8,9 +8,9 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const key = require("./config/key");
-const User = require("./Users/model").User;
 const CLIENT_URL = "http://localhost:3000";
 const Image = require("./Users/Images/routes/Images")
+const getUserName = require("./Users/routes/userName")
 
 require('./passport/services/passport.js');
 
@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 
 app.use('/image', Image);
 app.use('/auth/google', router);
-
+app.use('/getUserName', getUserName)
 
 app.listen(PORT, function() {
     console.log(`server is up and running on port ${PORT}`);

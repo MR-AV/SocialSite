@@ -3,13 +3,13 @@ import Likes from '@material-ui/icons/ThumbUpAlt';
 import Comments from '@material-ui/icons/ChatBubble';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
-import axios from "axios"
+import axiosCall from "../../ajaxRequest"
 import UserProfile from '@material-ui/icons/AccountCircle';
 import { ENDPOINT } from "../utils";
 import './styles.css'
-
-// import Cart from "./Cart";
 import Comment from './Comment';
+import { navigate } from "hookrouter";
+
 let change = 1
 const Item = function(props) {
   const addcommentboxref= useRef(null)
@@ -17,82 +17,74 @@ const Item = function(props) {
   const commentRef      = useRef(null)
   const commentCountRef = useRef(null)
   const likeRef = useRef(null)
-  const [comments, setComments] = useState([]);
   const setUserNameRef = useRef(null)
-
+  const [comments, setComments] = useState([]);
+  
+  
   function addcommentbox(){
     addcommentboxref.current.classList.toggle("addcommentdiv");
   }
   function viewcomments(){
 
   viewcommentsRef.current.classList.toggle("commentdiv");
-  axios(
-    {
+  const method = 'post'
+  const url = "/image/Comment/getComments"
+  const obj = {userId : props.userId,
+                 imageId : props.imageId}
 
-      method : 'post',
-      url : "/image/Comment/getComments",
-      data : JSON.stringify({
-        userId : props.userId,
-        imageId : props.imageId,
-      }),
-      headers: {'Content-Type': 'application/json' },
-      withCrdentials: true
-    })
+  axiosCall(method, url, obj)
   .then( (res) => {
-    console.log(res.data);
+    if(res.data.isAuthenticated === false) 
+      navigate('/')
+    else
     setComments(res.data.comments);
-  }).catch((err) => console.log("errInGettingComments = ",err));
+  })
+  .catch((err) => console.log("errInGettingComments = ",err));
   }
 
   function handleChange(){
-    axios(
-    {
+    const method = 'post'
+    const url = "/image/postLikes"
+    const obj = {userId : props.userId,
+                 imageId : props.imageId}
 
-      method : 'post',
-      url : "/image/postLikes",
-      data : JSON.stringify({
-        userId : props.userId,
-        imageId : props.imageId
-      }),
-      headers: {'Content-Type': 'application/json' },
-      withCrdentials: true
-    })
+    axiosCall(method, url, obj)
     .then((res) => {
-      console.log("res = ", res)
+      //console.log("auth = ",res.data.isAuthenticated)
+      if(res.data.isAuthenticated === false) 
+      navigate('/')
+      else
       likeRef.current.innerText = res.data.len})
-      .catch(err => {
+    .catch(err => {
         console.log("err = ",err)
       })
   }
+
   function handleComments(){
-    axios(
-      {
-  
-        method : 'post',
-        url : "/image/Comment/postComment",
-        data : JSON.stringify({
-          userId : props.userId,
-          imageId : props.imageId,
-          comment : commentRef.current.value,
-          clientName : setUserNameRef.current.checked ? "Anonymous" : props.userName
-        }),
-        headers: {'Content-Type': 'application/json' },
-        withCrdentials: true
-      })
-      .then((res) => {
-        console.log("res = ", res)
+
+    const method = 'post'
+    const url = "/image/Comment/postComment"
+    const obj = {userId : props.userId,
+                 imageId : props.imageId,
+                 comment : commentRef.current.value,
+                 clientName : setUserNameRef.current.checked ? "Anonymous" : props.userName}
+    axiosCall(method, url, obj)
+    .then((res) => {
+      if(res.data.isAuthenticated === false) 
+        navigate('/')
+      else{
+        let val = commentRef.current.value
         commentRef.current.value = "";
         addcommentbox()
         commentCountRef.current.innerText = res.data.len
+        setComments( prev => [...prev, {clientName : props.userName, comment : val}])
+      }
       })
-        .catch(err => {
+    .catch(err => {
           console.log("err = ",err)
         })
   }
-  function getComments(){
-
-
-  }
+ 
   return ( 
     <div >
     <Card style={{
@@ -139,6 +131,7 @@ const Item = function(props) {
         </div>
         <div className="nodisplay" ref={viewcommentsRef} >
         {
+          
           comments.map((comment, index) => {
           return (
             <Comment viewcommentsRef={viewcommentsRef} key = {index} comment = {comment} />
