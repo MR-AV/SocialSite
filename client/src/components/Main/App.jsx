@@ -4,6 +4,7 @@ import MyNav from "../navbar/navbar"
 import Image from "./Image"
 import axios from "axios"
 import { ENDPOINT } from "../utils";
+import { navigate } from 'hookrouter';
 import './styles.css'
 
 
@@ -14,7 +15,10 @@ const App = function(props) {
   useEffect(() => {
     axios.get(`${ENDPOINT}/image/get-images`,{ withCredentials: true })
       .then(res => {
-        console.log(res.data);
+        console.log("res.data = " ,res.data);
+        if(res.data.isAuthenticated === false) 
+          navigate('/')
+        else
         setItems(res.data);
       });
   }, []);
