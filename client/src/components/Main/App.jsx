@@ -12,7 +12,7 @@ const App = function(props) {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get(`${ENDPOINT}/get-images`,{ withCredentials: true })
+    axios.get(`${ENDPOINT}/image/get-images`,{ withCredentials: true })
       .then(res => {
         console.log(res.data);
         setItems(res.data);

@@ -6,8 +6,8 @@ const Login = () => {
     return(
 
         <div>
-        <h1>Welcome TO  Wasseypur</h1>
-        <a href = "https://www.google.com/">GOOGLE</a>
+        <h1>Welcome TO  UGLY forum</h1>
+        {/* <a href = "https://www.google.com/">GOOGLE</a> */}
         <a href = "/auth/google">SIGN IN WITH GOOGLE</a>
         </div>
 

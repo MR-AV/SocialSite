@@ -16,7 +16,7 @@ const Image = function(){
         width: "18rem"
       }}
     >
-    <form method="POST" action="/upload/image" enctype="multipart/form-data" >
+    <form method="POST" action="/image/upload/image" enctype="multipart/form-data" >
       <Card.Header><textarea name = "caption" placeholder = "Enter Caption" ></textarea></Card.Header>
       {image && <Card.Img src={image} alt="" width="300px" height="300px" />}
       <Card.Footer>

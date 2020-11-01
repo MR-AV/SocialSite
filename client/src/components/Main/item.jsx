@@ -4,8 +4,10 @@ import Comments from '@material-ui/icons/ChatBubble';
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import { Card, ButtonGroup, Button } from "react-bootstrap";
 import axios from "axios"
+import UserProfile from '@material-ui/icons/AccountCircle';
 import { ENDPOINT } from "../utils";
 import './styles.css'
+
 // import Cart from "./Cart";
 import Comment from './Comment';
 let change = 1
@@ -16,6 +18,7 @@ const Item = function(props) {
   const commentCountRef = useRef(null)
   const likeRef = useRef(null)
   const [comments, setComments] = useState([]);
+  const setUserNameRef = useRef(null)
 
   function addcommentbox(){
     addcommentboxref.current.classList.toggle("addcommentdiv");
@@ -27,7 +30,7 @@ const Item = function(props) {
     {
 
       method : 'post',
-      url : "/Comment/getComments",
+      url : "/image/Comment/getComments",
       data : JSON.stringify({
         userId : props.userId,
         imageId : props.imageId,
@@ -46,7 +49,7 @@ const Item = function(props) {
     {
 
       method : 'post',
-      url : "/postLikes",
+      url : "/image/postLikes",
       data : JSON.stringify({
         userId : props.userId,
         imageId : props.imageId
@@ -66,12 +69,12 @@ const Item = function(props) {
       {
   
         method : 'post',
-        url : "/Comment/postComment",
+        url : "/image/Comment/postComment",
         data : JSON.stringify({
           userId : props.userId,
           imageId : props.imageId,
           comment : commentRef.current.value,
-          clientName : props.userName
+          clientName : setUserNameRef.current.checked ? "Anonymous" : props.userName
         }),
         headers: {'Content-Type': 'application/json' },
         withCrdentials: true
@@ -99,13 +102,21 @@ const Item = function(props) {
       margin:"auto",
       marginBottom : "20px"
     }}>
-      <Card.Header>{props.caption}</Card.Header>
+      <Card.Header>
+      <UserProfile/>{props.userName}<br></br>
+      
+      </Card.Header>
       {/* <span >userid = {props.userId}</span> */}
+      <Card.Body>
+      {props.caption}
       <Card.Img
         variant="top"
         src={props.src}
         alt="comp"
+        
+        
       />
+      </Card.Body>
       {/* <Card.Body>Likes <span ref = {likeRef}>{props.likes}</span></Card.Body> */}
       <Card.Footer>
         <ButtonGroup aria-label="Basic example">
@@ -121,6 +132,8 @@ const Item = function(props) {
           </Button>
         </ButtonGroup>
         <div className="nodisplay"  ref={addcommentboxref} >
+        <input type="checkbox" name="setUserName" ref = {setUserNameRef}/>
+        <label for="setUserName">Comment Anonymously</label>
         <textarea placeholder="Write your comment"  width="400px" ref = {commentRef}></textarea>
         <button style={{height:"40px"}} onClick = {handleComments}>Post</button>
         </div>
