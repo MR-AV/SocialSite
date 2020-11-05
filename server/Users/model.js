@@ -8,19 +8,22 @@ const commentSchema = new mongoose.Schema({
     // userId : String,
     // imageId : String
 })
-const Comment = new mongoose.model("Comment", commentSchema);
+//const Comment = new mongoose.model("Comment", commentSchema);
 const imageSchema = new mongoose.Schema({
     url: String,
     caption : String,
-    likes : [String],
-    comments : [commentSchema]
+    comments : [commentSchema],
+    likes : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    postAt : Date,
+    userId : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 const Image = new mongoose.model("Image", imageSchema);
 
 const userSchema = new mongoose.Schema({
     userName: String,
     googleId: String,
-    image: [imageSchema]
+    //profileImage : { type: mongoose.Schema.Types.ObjectId, ref: 'Image' },
+    image : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }]
 });
 
 userSchema.plugin(findOrCreate);
@@ -32,5 +35,4 @@ module.exports = {
     imageSchema,
     Image,
     commentSchema,
-    Comment
 }
