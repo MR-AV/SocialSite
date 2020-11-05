@@ -15,7 +15,7 @@ const imageSchema = new mongoose.Schema({
     comments : [commentSchema],
     likes : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     postAt : Date,
-    userId : [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    userId : { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 const Image = new mongoose.model("Image", imageSchema);
 
