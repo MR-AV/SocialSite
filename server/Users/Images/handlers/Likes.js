@@ -1,3 +1,5 @@
+/*jshint esversion: 7*/
+
 const express = require("express");
 const router = express.Router();
 const User = require("../../model").User;

@@ -1,3 +1,5 @@
+/*jshint esversion: 7*/
+
 const express = require("express");
 const router = express.Router();
 const CLIENT_URL = "http://localhost:3000";

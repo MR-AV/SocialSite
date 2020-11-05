@@ -1,3 +1,4 @@
+/*jshint esversion: 7*/
 const findOrCreate = require("mongoose-findorcreate");
 const mongoose = require("mongoose");
 
